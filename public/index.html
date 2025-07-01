@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streamlabs TikTok Web Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎥 Streamlabs TikTok Web Tool</h1>
+            <p>Start TikTok streams via Streamlabs API with multi-account support</p>
+        </header>
+
+        <!-- Tabs Navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('stream')">🚀 Start Stream</button>
+            <button class="tab-btn" onclick="showTab('config')">⚙️ Configure Tokens</button>
+            <button class="tab-btn" onclick="showTab('logs')">📊 Stream Logs</button>
+        </div>
+
+        <!-- Stream Tab -->
+        <div id="streamTab" class="tab-content active">
+            <form id="streamForm" class="stream-form">
+                <div class="form-group">
+                    <label for="accountSelect">Select Account:</label>
+                    <select id="accountSelect" name="accountSelect" required>
+                        <option value="">Loading accounts...</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="customTokenGroup" style="display: none;">
+                    <label for="customToken">Custom Bearer Token:</label>
+                    <div class="input-with-toggle">
+                        <input 
+                            type="password" 
+                            id="customToken" 
+                            name="customToken" 
+                            placeholder="Enter custom bearer token"
+                        >
+                        <button type="button" id="toggleCustomToken" class="toggle-btn">👁️</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="streamTitle">Stream Title:</label>
+                    <input 
+                        type="text" 
+                        id="streamTitle" 
+                        name="streamTitle" 
+                        required 
+                        placeholder="Enter your stream title"
+                        maxlength="100"
+                    >
+                </div>
+
+                <button type="submit" id="startStreamBtn" class="start-btn">
+                    🚀 Start TikTok Stream
+                </button>
+            </form>
+
+            <div id="loadingSpinner" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Starting your stream...</p>
+            </div>
+
+            <div id="result" class="result hidden"></div>
+        </div>
+
+        <!-- Configuration Tab -->
+        <div id="configTab" class="tab-content">
+            <div class="config-section">
+                <h3>🔧 Bearer Token Configuration</h3>
+                <p class="config-note">Configure your bearer tokens for each account. These will be saved to JSON file.</p>
+                
+                <form id="configForm" class="config-form">
+                    <div id="tokenInputs">
+                        <!-- Token inputs will be generated dynamically -->
+                    </div>
+                    
+                    <div class="config-actions">
+                        <button type="submit" class="save-btn">💾 Save Configuration</button>
+                        <button type="button" id="clearConfigBtn" class="clear-btn">🗑️ Clear All</button>
+                        <button type="button" id="loadConfigBtn" class="load-btn">🔄 Reload Configuration</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Logs Tab -->
+        <div id="logsTab" class="tab-content">
+            <div class="logs-section">
+                <h3>📊 Stream Activity Logs</h3>
+                <div class="logs-actions">
+                    <button id="refreshLogsBtn" class="refresh-btn">🔄 Refresh Logs</button>
+                </div>
+                <div id="logsContainer" class="logs-container">
+                    <p>Loading logs...</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Made with ❤️ for TikTok streamers | Based on Python Streamlabs API script</p>
+        </footer>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="notification hidden">
+        <span id="notificationText"></span>
+        <button id="closeNotification" class="close-btn">×</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
